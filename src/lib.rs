@@ -188,6 +188,46 @@ impl Dice {
             dice
         }
     }
+
+    /// Gets the current face of each die in the dice set.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use one_d_six::Dice;
+    ///
+    /// let four_coins = Dice::new(4, 2);
+    ///
+    /// for val in four_coins.current_faces().iter() {
+    ///     assert!(val == &1 || val == &2);
+    /// }
+    /// ```
+    pub fn current_faces(&self) -> Vec<u32> {
+        self.dice.iter().map(|die| {
+            die.current_face()
+        }).collect()
+    }
+
+    /// Rolls all dice and gets the face of each one.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use one_d_six::Dice;
+    ///
+    /// let mut ten_d_4 = Dice::new(10, 4);
+    ///
+    /// for val in ten_d_4.roll_all().iter() {
+    ///     let val = *val;
+    ///     assert!(val >= 1);
+    ///     assert!(val <= 4);
+    /// }
+    /// ```
+    pub fn roll_all(&mut self) -> Vec<u32> {
+        self.dice.iter_mut().map(|die| {
+            die.roll()
+        }).collect()
+    }
 }
 
 #[cfg(test)]
@@ -225,6 +265,30 @@ mod tests {
 
             assert!(sum >= 2);
             assert!(sum <= 4);
+        }
+    }
+
+    #[test]
+    fn current_faces() {
+        for _ in 0..100 {
+            let dice = Dice::new(3, 6);
+
+            let sum: u32 = dice.current_faces().iter().sum();
+
+            assert!(sum >= 3);
+            assert!(sum <= 18);
+        }
+    }
+
+    #[test]
+    fn roll_all() {
+        for _ in 0..100 {
+            let mut dice = Dice::new(4, 2);
+
+            let sum: u32 = dice.roll_all().iter().sum();
+
+            assert!(sum >= 4);
+            assert!(sum <= 8);
         }
     }
 }
