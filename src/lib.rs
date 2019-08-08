@@ -159,6 +159,35 @@ impl Dice {
             dice
         }
     }
+
+    /// Creates a set of dice from a `Vec<Die>`.
+    /// Allows for mixture of Die types (d4, d6, etc.).
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use one_d_six::{
+    ///     Dice,
+    ///     Die,
+    /// };
+    ///
+    /// // Creates 2d6 + 1d4 dice collection
+    /// let dice = {
+    ///     let dice = [
+    ///         Die::new(6),
+    ///         Die::new(6),
+    ///         Die::new(4),
+    ///     ];
+    ///     Dice::from(Box::new(dice))
+    /// };
+    /// ```
+    pub fn from(dice: Box<[Die]>) -> Self {
+        let dice = dice.into_vec();
+
+        Dice {
+            dice
+        }
+    }
 }
 
 #[cfg(test)]
