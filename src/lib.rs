@@ -361,4 +361,16 @@ mod tests {
             assert!(total <= 14);
         }
     }
+
+    #[test]
+    fn dice_from_str() {
+        let mut dice: Dice = "3d4".parse().unwrap();
+
+        for _ in 0..100 {
+            dice = dice.roll_all();
+            let total = dice.total();
+            assert!(total >= 3);
+            assert!(total <= 12);
+        }
+    }
 }
