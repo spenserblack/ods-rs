@@ -1,3 +1,4 @@
+use std::ops::Add;
 use rand::Rng;
 
 /// Represents a single die.
@@ -59,6 +60,14 @@ impl Die {
     }
 }
 
+impl Add for Die {
+    type Output = u32;
+
+    fn add(self, other: Self) -> Self::Output {
+        self.current_value + other.current_value
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -81,6 +90,19 @@ mod tests {
             d12.roll();
             assert!(d12.current_face() >= 1);
             assert!(d12.current_face() <= 12);
+        }
+    }
+
+    #[test]
+    fn add_die() {
+        for _ in 0..100 {
+            let penny = Die::new(2);
+            let quarter = Die::new(2);
+
+            let sum = penny + quarter;
+
+            assert!(sum >= 2);
+            assert!(sum <= 4);
         }
     }
 }
