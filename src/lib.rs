@@ -52,6 +52,27 @@ pub struct Die {
     current_value: u32,
 }
 
+/// A Handful of dice.
+///
+/// # Example
+///
+/// ```
+/// use one_d_six::Dice;
+///
+/// let mut dice: Dice = "3d6".parse();
+/// let mut sum: u32 = 0;
+///
+/// for face in dice.roll_all() {
+///     sum += face;
+/// }
+///
+/// assert!(sum >= 3);
+/// assert!(sum <= 18);
+/// ```
+pub struct Dice {
+    dice: Vec<Die>,
+}
+
 impl Die {
     /// Creates a single die with the specified number of faces.
     ///
@@ -109,6 +130,22 @@ impl Add for Die {
 
     fn add(self, other: Self) -> Self::Output {
         self.current_value + other.current_value
+    }
+}
+
+impl Dice {
+    pub fn new(dice: usize, faces: u32) -> Self {
+        let dice = {
+            let mut v: Vec<Die> = Vec::with_capacity(dice);
+            for _ in 0..dice {
+                v.push(Die::new(faces));
+            }
+            v
+        };
+
+        Dice {
+            dice
+        }
     }
 }
 
