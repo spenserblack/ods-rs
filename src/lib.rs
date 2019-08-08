@@ -217,16 +217,17 @@ impl Dice {
     ///
     /// let mut ten_d_4 = Dice::new(10, 4);
     ///
-    /// for val in ten_d_4.roll_all().iter() {
+    /// for val in ten_d_4.roll_all().current_faces().iter() {
     ///     let val = *val;
     ///     assert!(val >= 1);
     ///     assert!(val <= 4);
     /// }
     /// ```
-    pub fn roll_all(&mut self) -> Vec<u32> {
+    pub fn roll_all(mut self) -> Self {
         self.dice.iter_mut().map(|die| {
-            die.roll()
-        }).collect()
+            die.roll();
+        });
+        self
     }
 }
 
@@ -285,7 +286,7 @@ mod tests {
         for _ in 0..100 {
             let mut dice = Dice::new(4, 2);
 
-            let sum: u32 = dice.roll_all().iter().sum();
+            let sum: u32 = dice.roll_all().current_faces().iter().sum();
 
             assert!(sum >= 4);
             assert!(sum <= 8);
