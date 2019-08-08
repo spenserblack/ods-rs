@@ -258,6 +258,23 @@ impl Dice {
     }
 }
 
+impl Add for Dice {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self::Output {
+        let mut dice: Vec<Die> = Vec::new();
+        for die in self.dice.into_iter() {
+            dice.push(die);
+        }
+        for die in other.dice.into_iter() {
+            dice.push(die);
+        }
+        Dice {
+            dice,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -328,6 +345,20 @@ mod tests {
 
             assert!(total >= 2);
             assert!(total <= 6);
+        }
+    }
+
+    #[test]
+    fn add_dice() {
+        let one_d_6 = Dice::new(1, 6);
+        let two_d_4 = Dice::new(2, 4);
+        let mut dice = one_d_6 + two_d_4;
+
+        for _ in 0..100 {
+            dice = dice.roll_all();
+            let total = dice.total();
+            assert!(total >= 2);
+            assert!(total <= 14);
         }
     }
 }
