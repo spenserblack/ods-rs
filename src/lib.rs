@@ -67,7 +67,7 @@ pub struct Die {
 /// assert!(dice.total() <= 18);
 /// ```
 ///
-/// ## Adding to collections of dice
+/// ## Adding two collections of dice
 ///
 /// ```
 /// use one_d_six::Dice;
