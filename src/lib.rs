@@ -229,6 +229,22 @@ impl Dice {
         });
         self
     }
+
+    /// Gets the total of the current faces of the dice.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use one_d_six::Dice;
+    ///
+    /// let two_d_4 = Dice::new(2, 4);
+    ///
+    /// assert!(two_d_4.total() >= 2);
+    /// assert!(two_d_4.total() <= 8);
+    /// ```
+    pub fn total(&self) -> u32 {
+        self.current_faces().iter().sum()
+    }
 }
 
 #[cfg(test)]
@@ -290,6 +306,17 @@ mod tests {
 
             assert!(sum >= 4);
             assert!(sum <= 8);
+        }
+    }
+
+    #[test]
+    fn total() {
+        for _ in 0..100 {
+            let dice = Dice::new(2, 3);
+            let total = dice.total();
+
+            assert!(total >= 2);
+            assert!(total <= 6);
         }
     }
 }
