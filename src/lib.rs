@@ -54,20 +54,31 @@ pub struct Die {
 
 /// A Handful of dice.
 ///
-/// # Example
+/// # Examples
 ///
 /// ```
 /// use one_d_six::Dice;
 ///
 /// let mut dice: Dice = "3d6".parse();
-/// let mut sum: u32 = 0;
 ///
-/// for face in dice.roll_all() {
-///     sum += face;
-/// }
+/// dice.roll_all();
 ///
-/// assert!(sum >= 3);
-/// assert!(sum <= 18);
+/// assert!(dice.total() >= 3);
+/// assert!(dice.total() <= 18);
+/// ```
+///
+/// ## Adding to collections of dice
+///
+/// ```
+/// use one_d_six::Dice;
+///
+/// let one_d6: Dice = "1d6".parse();
+/// let three_d4: Dice = Dice::new(3, 4);
+///
+/// let dice = one_d6 + three_d4;
+///
+/// assert!(dice.total() >= 4);
+/// assert!(dice.total() <= 18);
 /// ```
 pub struct Dice {
     dice: Vec<Die>,
