@@ -134,6 +134,18 @@ impl Add for Die {
 }
 
 impl Dice {
+    /// Creates a new set of dice.
+    /// Each die in the set has an initial starting value.
+    /// Only allows dice of same type. No mixture of d4 and d6.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use one_d_six::Dice;
+    ///
+    /// // Creates 3d6 dice collection
+    /// let dice = Dice::new(3, 6);
+    /// ```
     pub fn new(dice: usize, faces: u32) -> Self {
         let dice = {
             let mut v: Vec<Die> = Vec::with_capacity(dice);
