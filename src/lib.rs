@@ -1,6 +1,7 @@
 use rand::Rng;
 
 /// Represents a single die.
+/// Has an initial random value.
 pub struct Die {
     faces: u32,
     current_value: u32,
