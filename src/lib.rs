@@ -61,6 +61,10 @@ pub fn try_quickroll(dice_format: &str) -> Result<u32, String> {
 ///
 /// assert!(coin_flip == 1 || coin_flip == 2);
 /// ```
+///
+/// # Panics
+///
+/// Panics if `dice_format` is in an improper format.
 pub fn quickroll(dice_format: &str) -> u32 {
     let dice: Dice = dice_format.parse().unwrap();
     dice.total()
