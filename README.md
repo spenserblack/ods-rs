@@ -27,7 +27,7 @@ use one_d_six::{
   Dice,
 };
 
-// Quickly generating a set of Dice and rolling them
+// Quickly generating a set of Dice and rolls them
 if quickroll("1d2") == 1 {
     println!("Heads!");
 } else {
