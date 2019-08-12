@@ -1,4 +1,8 @@
 # One D Six
+![Crates.io](https://img.shields.io/crates/v/one-d-six)
+![Crates.io](https://img.shields.io/crates/d/one-d-six)
+![Crates.io](https://img.shields.io/crates/l/one-d-six)
+
 Rolls some dice
 
 ## Installing
