@@ -28,6 +28,7 @@
 //!
 //! println!("Result of 3d6 + 2d4 roll: {}", roll);
 //! ```
+use std::fmt;
 use std::ops::Add;
 use rand::Rng;
 
@@ -363,6 +364,12 @@ impl std::str::FromStr for Dice {
             }
         };
         Ok(Dice::new(dice_amount, dice_faces))
+    }
+}
+
+impl fmt::Display for Dice {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.total())
     }
 }
 
