@@ -373,6 +373,26 @@ impl fmt::Display for Dice {
     }
 }
 
+impl fmt::Debug for Dice {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut iter = self.dice.iter();
+        let first = match iter.next() {
+            Some(d) => d,
+            None => return Err(fmt::Error),
+        };
+        if let Err(e) = write!(f, "{}", first.current_face()) {
+            return Err(e);
+        }
+
+        for die in iter {
+            if let Err(e) = write!(f, " {}", die.current_face()) {
+                return Err(e);
+            }
+        }
+        Ok(())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
