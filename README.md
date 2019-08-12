@@ -1,5 +1,5 @@
 # One D Six
-Rust library for rolling dice
+Rolls some dice
 
 ## Installing
 1. Clone this repository
