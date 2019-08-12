@@ -275,6 +275,28 @@ impl Add for Dice {
     }
 }
 
+impl std::str::FromStr for Dice {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let (dice_amount, dice_faces): (usize, u32) = {
+            let mut s = s.split('d');
+            let values = if let (Some(d), Some(f)) = (s.next(), s.next()) {
+                (d.parse(), f.parse())
+            } else {
+                return Err(String::from("Missing 'd'"));
+            };
+
+            if let (Ok(d), Ok(f)) = values {
+                (d, f)
+            } else {
+                return Err(String::from("Improper dice format"));
+            }
+        };
+        Ok(Dice::new(dice_amount, dice_faces))
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
