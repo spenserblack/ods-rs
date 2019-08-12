@@ -2,6 +2,8 @@
 //!
 //! # Examples
 //!
+//! ## Simple Usage
+//!
 //! ```
 //! use one_d_six::quickroll;
 //!
@@ -11,6 +13,8 @@
 //!     println!("Tails!");
 //! }
 //! ```
+//!
+//! ## Adding Sets of Dice Together
 //!
 //! ```
 //! use one_d_six::Dice;
@@ -27,6 +31,26 @@
 //! let roll = dice.total();
 //!
 //! println!("Result of 3d6 + 2d4 roll: {}", roll);
+//! ```
+//!
+//! ## Getting Dice as String
+//! ### Simple String
+//!
+//! ```
+//! use one_d_six::Dice;
+//!
+//!
+//! println!("3d6: {}", Dice::new(3, 6));
+//! ```
+//!
+//! ### Complex String
+//!
+//! ```
+//! use one_d_six::Dice;
+//!
+//!
+//! // Will look like "1 2 3"
+//! println!("3d6: {:?}", Dice::new(3, 6));
 //! ```
 use std::fmt;
 use std::ops::Add;
