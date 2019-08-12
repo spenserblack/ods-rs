@@ -1,3 +1,33 @@
+//! Provides utilities for rolling dice.
+//!
+//! # Examples
+//!
+//! ```
+//! use one_d_six::quickroll;
+//!
+//! if quickroll("1d2") == 1 {
+//!     println!("Heads!");
+//! } else {
+//!     println!("Tails!");
+//! }
+//! ```
+//!
+//! ```
+//! use one_d_six::Dice;
+//!
+//! // 3d6
+//! let set_1 = Dice::new(3, 6);
+//! // 2d4
+//! let set_2: Dice = "2d4".parse().unwrap();
+//!
+//! // 3d6 + 2d4
+//! let dice = set_1 + set_2;
+//!
+//! // Each set of dice starts pre-rolled
+//! let roll = dice.total();
+//!
+//! println!("Result of 3d6 + 2d4 roll: {}", roll);
+//! ```
 use std::ops::Add;
 use rand::Rng;
 
