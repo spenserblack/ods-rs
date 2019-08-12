@@ -329,9 +329,10 @@ impl Dice {
     /// }
     /// ```
     pub fn roll_all(mut self) -> Self {
-        self.dice.iter_mut().map(|die| {
+        let iter = self.dice.iter_mut().map(|die| {
             die.roll();
         });
+        for _ in iter {}
         self
     }
 
