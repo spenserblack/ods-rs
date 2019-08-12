@@ -54,7 +54,6 @@
 //! ```
 use std::fmt;
 use std::ops::Add;
-use rand::Rng;
 
 /// Attempts to roll dice based on a *1d6* style string.
 ///
