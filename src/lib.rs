@@ -470,7 +470,7 @@ mod tests {
     #[test]
     fn roll_all() {
         for _ in 0..100 {
-            let mut dice = Dice::new(4, 2);
+            let dice = Dice::new(4, 2);
 
             let sum: u32 = dice.roll_all().current_faces().iter().sum();
 
