@@ -1,6 +1,41 @@
 use std::ops::Add;
 use rand::Rng;
 
+/// Attempts to roll dice based on a *1d6* style string.
+///
+/// # Example
+///
+/// ```
+/// use one_d_six::try_quickroll;
+///
+/// if let Ok(roll) = try_quickroll("1d6") {
+///     assert!(roll >= 1);
+///     assert!(roll <= 6);
+/// } else {
+///     unreachable!();
+/// }
+/// ```
+pub fn try_quickroll(dice_format: &str) -> Result<u32, String> {
+    let dice: Dice = dice_format.parse()?;
+    Ok(dice.total())
+}
+
+/// Rolls dice based on a *1d6* style string.
+///
+/// # Example
+///
+/// ```
+/// use one_d_six::quickroll;
+///
+/// let coin_flip = quickroll("1d2");
+///
+/// assert!(coin_flip == 1 || coin_flip == 2);
+/// ```
+pub fn quickroll(dice_format: &str) -> u32 {
+    let dice: Dice = dice_format.parse().unwrap();
+    dice.total()
+}
+
 /// Represents a single die.
 /// Has an initial random value.
 ///
