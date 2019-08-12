@@ -59,9 +59,9 @@ pub struct Die {
 /// ```
 /// use one_d_six::Dice;
 ///
-/// let mut dice: Dice = "3d6".parse();
+/// let mut dice: Dice = "3d6".parse().unwrap();
 ///
-/// dice.roll_all();
+/// dice = dice.roll_all();
 ///
 /// assert!(dice.total() >= 3);
 /// assert!(dice.total() <= 18);
@@ -72,7 +72,7 @@ pub struct Die {
 /// ```
 /// use one_d_six::Dice;
 ///
-/// let one_d6: Dice = "1d6".parse();
+/// let one_d6: Dice = "1d6".parse().unwrap();
 /// let three_d4: Dice = Dice::new(3, 4);
 ///
 /// let dice = one_d6 + three_d4;
