@@ -1,4 +1,4 @@
 build:
 	cargo build --release
-install: build
+install:
 	cargo install --path .
