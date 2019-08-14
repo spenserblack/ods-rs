@@ -2,6 +2,7 @@
 [![Crates.io](https://img.shields.io/crates/v/one-d-six)](https://crates.io/crates/one-d-six)
 [![docs.rs](https://docs.rs/one-d-six/badge.svg)](https://docs.rs/one-d-six/)
 ![Crates.io](https://img.shields.io/crates/d/one-d-six)
+![Crates.io](https://img.shields.io/crates/dv/one-d-six)
 ![Crates.io](https://img.shields.io/crates/l/one-d-six)
 
 Rolls some dice
