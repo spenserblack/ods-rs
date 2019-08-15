@@ -27,14 +27,14 @@ one-d-six --complex 2d20 1d12
 ### As Library
 *This is not complete usage documentation. This is the expected most common usage.*
 ```rust
-
 use one_d_six::{
   quickroll,
   Dice,
 };
 
 // Quickly generating a set of Dice and rolls them
-if quickroll("1d2") == 1 {
+let coinflip: u8 = quickroll("1d2");
+if coinflip == 1 {
     println!("Heads!");
 } else {
     println!("Tails!");
@@ -42,7 +42,7 @@ if quickroll("1d2") == 1 {
 
 // Creating sets of dice
 let set_1 = Dice::new(2, 4); // Creates 2d4 with Dice::new
-let set_2: Dice = "1d20".parse().unwrap() // Creates 1d20 by parsing str
+let set_2: Dice = "1d20".parse().unwrap(); // Creates 1d20 by parsing str
 
 // Combining sets of dice
 let mut dice = set_1 + set_2; // Creates 2d4 + 1d20
@@ -60,5 +60,5 @@ for _ in 0..50 {
 }
 
 // Getting value of each die cast
-let results = format!("{:?}", dice);
+let _results = format!("{:?}", dice);
 ```
