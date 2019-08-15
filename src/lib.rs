@@ -40,7 +40,8 @@
 //! use one_d_six::Dice;
 //!
 //!
-//! println!("3d6: {}", Dice::new(3, 6));
+//! let dice: Dice = Dice::new(3, 6);
+//! println!("3d6: {}", dice);
 //! ```
 //!
 //! ### Complex String
@@ -50,7 +51,8 @@
 //!
 //!
 //! // Will look like "1 2 3"
-//! println!("3d6: {:?}", Dice::new(3, 6));
+//! let dice: Dice = Dice::new(3, 6);
+//! println!("3d6: {:?}", dice);
 //! ```
 use std::fmt;
 use std::ops::Add;
@@ -182,7 +184,7 @@ pub fn quickroll<T: Rollable>(dice_format: &str) -> T {
 /// ```
 /// use one_d_six::Die;
 ///
-/// let d4 = Die::new(4);
+/// let d4: Die = Die::new(4);
 /// let d6 = Die::new(6);
 ///
 /// let result = d4 + d6;
@@ -235,7 +237,7 @@ impl<T: Rollable> Die<T> {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let coin = Die::new(2);
+    /// let coin: Die = Die::new(2);
     /// ```
     pub fn new(faces: T) -> Self {
         let mut die = Die {
@@ -252,7 +254,7 @@ impl<T: Rollable> Die<T> {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let mut d6 = Die::new(6);
+    /// let mut d6: Die = Die::new(6);
     ///
     /// assert!(d6.roll() >= 1);
     /// assert!(d6.current_face() <= 6);
@@ -268,7 +270,7 @@ impl<T: Rollable> Die<T> {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let d4 = Die::new(4);
+    /// let d4: Die = Die::new(4);
     ///
     /// assert!(d4.current_face() >= 1);
     /// assert!(d4.current_face() <= 4);
@@ -297,7 +299,7 @@ impl<T: Rollable> Dice<T> {
     /// use one_d_six::Dice;
     ///
     /// // Creates 3d6 dice collection
-    /// let dice = Dice::new(3, 6);
+    /// let dice: Dice = Dice::new(3, 6);
     /// ```
     pub fn new(dice: usize, faces: T) -> Self {
         let dice = {
@@ -325,7 +327,7 @@ impl<T: Rollable> Dice<T> {
     /// };
     ///
     /// // Creates 2d6 + 1d4 dice collection
-    /// let dice = {
+    /// let dice: Dice = {
     ///     let dice = [
     ///         Die::new(6),
     ///         Die::new(6),
@@ -349,7 +351,7 @@ impl<T: Rollable> Dice<T> {
     /// ```
     /// use one_d_six::Dice;
     ///
-    /// let four_coins = Dice::new(4, 2);
+    /// let four_coins: Dice = Dice::new(4, 2);
     ///
     /// for val in four_coins.current_faces().iter() {
     ///     assert!(val == &1 || val == &2);
@@ -371,7 +373,7 @@ impl<T: Rollable> Dice<T> {
     /// let mut ten_d_4 = Dice::new(10, 4);
     ///
     /// for val in ten_d_4.roll_all().current_faces().iter() {
-    ///     let val = *val;
+    ///     let val: u32 = *val;
     ///     assert!(val >= 1);
     ///     assert!(val <= 4);
     /// }
@@ -391,7 +393,7 @@ impl<T: Rollable> Dice<T> {
     /// ```
     /// use one_d_six::Dice;
     ///
-    /// let two_d_4 = Dice::new(2, 4);
+    /// let two_d_4: Dice = Dice::new(2, 4);
     ///
     /// assert!(two_d_4.total() >= 2);
     /// assert!(two_d_4.total() <= 8);
