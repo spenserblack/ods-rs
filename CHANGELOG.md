@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.2.0...master)
+## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.2.1...master)
+
+## [0.2.1] 2019/08/15
 ### Removed
 - Accidental `pub use` of types from the `rand` crate
 
@@ -16,4 +18,5 @@
 - Library for rolling dice
 - Binary w/ CLI for rolling dice
 
+[0.2.1]: https://github.com/spenserblack/one-d-six-rs/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/spenserblack/one-d-six-rs/compare/v0.1.0...v0.2.0
