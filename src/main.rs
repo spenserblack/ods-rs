@@ -25,7 +25,7 @@ fn main() {
     let complex = matches.is_present("complexity");
 
     let rolls = rolls.map(|r| {
-        let dice: Result<Dice, _> = r.parse();
+        let dice: Result<Dice<u32>, _> = r.parse();
         (r, dice)
     });
 
