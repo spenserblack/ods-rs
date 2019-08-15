@@ -59,10 +59,6 @@ use std::ops::Add;
 use std::str::FromStr;
 
 use num::Unsigned;
-pub use rand::distributions::{
-    Distribution,
-    Standard,
-};
 
 /// Defines a type that can be rolled for.
 /// Implement this trait on a type you would like to roll for.
