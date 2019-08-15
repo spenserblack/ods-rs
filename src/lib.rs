@@ -7,7 +7,7 @@
 //! ```
 //! use one_d_six::quickroll;
 //!
-//! if quickroll("1d2") == 1 {
+//! if quickroll::<u16>("1d2") == 1 {
 //!     println!("Heads!");
 //! } else {
 //!     println!("Tails!");
@@ -40,7 +40,8 @@
 //! use one_d_six::Dice;
 //!
 //!
-//! println!("3d6: {}", Dice::new(3, 6));
+//! let dice: Dice = Dice::new(3, 6);
+//! println!("3d6: {}", dice);
 //! ```
 //!
 //! ### Complex String
@@ -50,10 +51,61 @@
 //!
 //!
 //! // Will look like "1 2 3"
-//! println!("3d6: {:?}", Dice::new(3, 6));
+//! let dice: Dice = Dice::new(3, 6);
+//! println!("3d6: {:?}", dice);
 //! ```
 use std::fmt;
 use std::ops::Add;
+use std::str::FromStr;
+
+use num::Unsigned;
+pub use rand::distributions::{
+    Distribution,
+    Standard,
+};
+
+/// Defines a type that can be rolled for.
+/// Implement this trait on a type you would like to roll for.
+pub trait Rollable: Unsigned + fmt::Display + FromStr + Copy {
+    fn roll(max: Self) -> Self;
+}
+
+impl Rollable for u8 {
+    fn roll(max: u8) -> u8 {
+        let r: u8 = rand::random();
+        (r % max) + 1
+    }
+}
+impl Rollable for u16 {
+    fn roll(max: u16) -> u16 {
+        let r: u16 = rand::random();
+        (r % max) + 1
+    }
+}
+impl Rollable for u32 {
+    fn roll(max: u32) -> u32 {
+        let r: u32 = rand::random();
+        (r % max) + 1
+    }
+}
+impl Rollable for u64 {
+    fn roll(max: u64) -> u64 {
+        let r: u64 = rand::random();
+        (r % max) + 1
+    }
+}
+impl Rollable for u128 {
+    fn roll(max: u128) -> u128 {
+        let r: u128 = rand::random();
+        (r % max) + 1
+    }
+}
+impl Rollable for usize {
+    fn roll(max: usize) -> usize {
+        let r: usize = rand::random();
+        (r % max) + 1
+    }
+}
 
 /// Attempts to roll dice based on a *1d6* style string.
 ///
@@ -62,15 +114,15 @@ use std::ops::Add;
 /// ```
 /// use one_d_six::try_quickroll;
 ///
-/// if let Ok(roll) = try_quickroll("1d6") {
+/// if let Ok(roll) = try_quickroll::<u32>("1d6") {
 ///     assert!(roll >= 1);
 ///     assert!(roll <= 6);
 /// } else {
 ///     unreachable!();
 /// }
 /// ```
-pub fn try_quickroll(dice_format: &str) -> Result<u32, String> {
-    let dice: Dice = dice_format.parse()?;
+pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String> {
+    let dice: Dice<T> = dice_format.parse()?;
     Ok(dice.total())
 }
 
@@ -81,7 +133,7 @@ pub fn try_quickroll(dice_format: &str) -> Result<u32, String> {
 /// ```
 /// use one_d_six::quickroll;
 ///
-/// let coin_flip = quickroll("1d2");
+/// let coin_flip: u8 = quickroll("1d2");
 ///
 /// assert!(coin_flip == 1 || coin_flip == 2);
 /// ```
@@ -89,8 +141,8 @@ pub fn try_quickroll(dice_format: &str) -> Result<u32, String> {
 /// # Panics
 ///
 /// Panics if `dice_format` is in an improper format.
-pub fn quickroll(dice_format: &str) -> u32 {
-    let dice: Dice = dice_format.parse().unwrap();
+pub fn quickroll<T: Rollable>(dice_format: &str) -> T {
+    let dice: Dice<T> = dice_format.parse().unwrap();
     dice.total()
 }
 
@@ -132,7 +184,7 @@ pub fn quickroll(dice_format: &str) -> u32 {
 /// ```
 /// use one_d_six::Die;
 ///
-/// let d4 = Die::new(4);
+/// let d4: Die = Die::new(4);
 /// let d6 = Die::new(6);
 ///
 /// let result = d4 + d6;
@@ -140,9 +192,9 @@ pub fn quickroll(dice_format: &str) -> u32 {
 /// assert!(result >= 2);
 /// assert!(result <= 10);
 /// ```
-pub struct Die {
-    faces: u32,
-    current_value: u32,
+pub struct Die<T: Rollable = u32> {
+    faces: T,
+    current_value: T,
 }
 
 /// A Handful of dice.
@@ -173,11 +225,11 @@ pub struct Die {
 /// assert!(dice.total() >= 4);
 /// assert!(dice.total() <= 18);
 /// ```
-pub struct Dice {
-    dice: Vec<Die>,
+pub struct Dice<T: Rollable = u32> {
+    dice: Vec<Die<T>>,
 }
 
-impl Die {
+impl<T: Rollable> Die<T> {
     /// Creates a single die with the specified number of faces.
     ///
     /// # Example
@@ -185,12 +237,12 @@ impl Die {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let coin = Die::new(2);
+    /// let coin: Die = Die::new(2);
     /// ```
-    pub fn new(faces: u32) -> Self {
+    pub fn new(faces: T) -> Self {
         let mut die = Die {
             faces,
-            current_value: 1,
+            current_value: T::one(),
         };
         die.roll();
         die
@@ -202,14 +254,13 @@ impl Die {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let mut d6 = Die::new(6);
+    /// let mut d6: Die = Die::new(6);
     ///
     /// assert!(d6.roll() >= 1);
     /// assert!(d6.current_face() <= 6);
     /// ```
-    pub fn roll(&mut self) -> u32 {
-        let r: u32 = rand::random();
-        self.current_value = (r % self.faces) + 1;
+    pub fn roll(&mut self) -> T {
+        self.current_value = T::roll(self.faces);
         self.current_value
     }
     /// Gets the current value of the die.
@@ -219,25 +270,25 @@ impl Die {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let d4 = Die::new(4);
+    /// let d4: Die = Die::new(4);
     ///
     /// assert!(d4.current_face() >= 1);
     /// assert!(d4.current_face() <= 4);
     /// ```
-    pub fn current_face(&self) -> u32 {
+    pub fn current_face(&self) -> T {
         self.current_value
     }
 }
 
-impl Add for Die {
-    type Output = u32;
+impl<T: Rollable> Add for Die<T> {
+    type Output = T;
 
     fn add(self, other: Self) -> Self::Output {
         self.current_value + other.current_value
     }
 }
 
-impl Dice {
+impl<T: Rollable> Dice<T> {
     /// Creates a new set of dice.
     /// Each die in the set has an initial starting value.
     /// Only allows dice of same type. No mixture of d4 and d6.
@@ -248,11 +299,11 @@ impl Dice {
     /// use one_d_six::Dice;
     ///
     /// // Creates 3d6 dice collection
-    /// let dice = Dice::new(3, 6);
+    /// let dice: Dice = Dice::new(3, 6);
     /// ```
-    pub fn new(dice: usize, faces: u32) -> Self {
+    pub fn new(dice: usize, faces: T) -> Self {
         let dice = {
-            let mut v: Vec<Die> = Vec::with_capacity(dice);
+            let mut v: Vec<Die<T>> = Vec::with_capacity(dice);
             for _ in 0..dice {
                 v.push(Die::new(faces));
             }
@@ -276,7 +327,7 @@ impl Dice {
     /// };
     ///
     /// // Creates 2d6 + 1d4 dice collection
-    /// let dice = {
+    /// let dice: Dice = {
     ///     let dice = [
     ///         Die::new(6),
     ///         Die::new(6),
@@ -285,7 +336,7 @@ impl Dice {
     ///     Dice::from(Box::new(dice))
     /// };
     /// ```
-    pub fn from(dice: Box<[Die]>) -> Self {
+    pub fn from(dice: Box<[Die<T>]>) -> Self {
         let dice = dice.into_vec();
 
         Dice {
@@ -300,13 +351,13 @@ impl Dice {
     /// ```
     /// use one_d_six::Dice;
     ///
-    /// let four_coins = Dice::new(4, 2);
+    /// let four_coins: Dice = Dice::new(4, 2);
     ///
     /// for val in four_coins.current_faces().iter() {
     ///     assert!(val == &1 || val == &2);
     /// }
     /// ```
-    pub fn current_faces(&self) -> Vec<u32> {
+    pub fn current_faces(&self) -> Vec<T> {
         self.dice.iter().map(|die| {
             die.current_face()
         }).collect()
@@ -322,7 +373,7 @@ impl Dice {
     /// let mut ten_d_4 = Dice::new(10, 4);
     ///
     /// for val in ten_d_4.roll_all().current_faces().iter() {
-    ///     let val = *val;
+    ///     let val: u32 = *val;
     ///     assert!(val >= 1);
     ///     assert!(val <= 4);
     /// }
@@ -342,21 +393,25 @@ impl Dice {
     /// ```
     /// use one_d_six::Dice;
     ///
-    /// let two_d_4 = Dice::new(2, 4);
+    /// let two_d_4: Dice = Dice::new(2, 4);
     ///
     /// assert!(two_d_4.total() >= 2);
     /// assert!(two_d_4.total() <= 8);
     /// ```
-    pub fn total(&self) -> u32 {
-        self.current_faces().iter().sum()
+    pub fn total(&self) -> T {
+        let mut total = T::zero();
+        for f in self.current_faces().iter() {
+            total = total + *f;
+        }
+        total
     }
 }
 
-impl Add for Dice {
+impl<T: Rollable> Add for Dice<T> {
     type Output = Self;
 
     fn add(self, other: Self) -> Self::Output {
-        let mut dice: Vec<Die> = Vec::new();
+        let mut dice: Vec<Die<T>> = Vec::new();
         for die in self.dice.into_iter() {
             dice.push(die);
         }
@@ -369,11 +424,11 @@ impl Add for Dice {
     }
 }
 
-impl std::str::FromStr for Dice {
+impl<T: Rollable> FromStr for Dice<T> {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let (dice_amount, dice_faces): (usize, u32) = {
+        let (dice_amount, dice_faces): (usize, T) = {
             let mut s = s.split('d');
             let values = if let (Some(d), Some(f)) = (s.next(), s.next()) {
                 (d.parse(), f.parse())
@@ -391,13 +446,13 @@ impl std::str::FromStr for Dice {
     }
 }
 
-impl fmt::Display for Dice {
+impl<T: Rollable> fmt::Display for Dice<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.total())
     }
 }
 
-impl fmt::Debug for Dice {
+impl<T: Rollable> fmt::Debug for Dice<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut iter = self.dice.iter();
         let first = match iter.next() {
@@ -423,7 +478,7 @@ mod tests {
 
     #[test]
     fn current_face() {
-        let coin = Die::new(2);
+        let coin: Die<u128> = Die::new(2);
 
         for _ in 0..100 {
             assert!(coin.current_face() >= 1);
@@ -433,7 +488,7 @@ mod tests {
 
     #[test]
     fn roll() {
-        let mut d12 = Die::new(12);
+        let mut d12: Die<u64> = Die::new(12);
 
         for _ in 0..100 {
             d12.roll();
@@ -445,8 +500,8 @@ mod tests {
     #[test]
     fn add_die() {
         for _ in 0..100 {
-            let penny = Die::new(2);
-            let quarter = Die::new(2);
+            let penny: Die<u8> = Die::new(2);
+            let quarter: Die<u8> = Die::new(2);
 
             let sum = penny + quarter;
 
@@ -482,7 +537,7 @@ mod tests {
     #[test]
     fn total() {
         for _ in 0..100 {
-            let dice = Dice::new(2, 3);
+            let dice: Dice<u16> = Dice::new(2, 3);
             let total = dice.total();
 
             assert!(total >= 2);
@@ -492,8 +547,8 @@ mod tests {
 
     #[test]
     fn add_dice() {
-        let one_d_6 = Dice::new(1, 6);
-        let two_d_4 = Dice::new(2, 4);
+        let one_d_6: Dice<u8> = Dice::new(1, 6);
+        let two_d_4: Dice<u8> = Dice::new(2, 4);
         let mut dice = one_d_6 + two_d_4;
 
         for _ in 0..100 {
@@ -506,7 +561,7 @@ mod tests {
 
     #[test]
     fn dice_from_str() {
-        let mut dice: Dice = "3d4".parse().unwrap();
+        let mut dice: Dice<u32> = "3d4".parse().unwrap();
 
         for _ in 0..100 {
             dice = dice.roll_all();
