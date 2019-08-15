@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.1.0...master)
+## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.2.0...master)
+
+## [0.2.0] 2019/08/15
 ### Added
 - `Rollable` trait that allows user to make a type that can be rolled for
 
@@ -11,3 +13,5 @@
 ### Added
 - Library for rolling dice
 - Binary w/ CLI for rolling dice
+
+[0.2.0]: https://github.com/spenserblack/one-d-six-rs/compare/v0.1.0...v0.2.0
