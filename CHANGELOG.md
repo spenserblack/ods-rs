@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.2.0...master)
+### Removed
+- Accidental `pub use` of types from the `rand` crate
 
 ## [0.2.0] 2019/08/15
 ### Added
