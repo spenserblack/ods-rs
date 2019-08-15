@@ -7,7 +7,7 @@
 //! ```
 //! use one_d_six::quickroll;
 //!
-//! if quickroll("1d2") == 1 {
+//! if quickroll::<u16>("1d2") == 1 {
 //!     println!("Heads!");
 //! } else {
 //!     println!("Tails!");
@@ -50,7 +50,7 @@
 //!
 //!
 //! // Will look like "1 2 3"
-//! println!("3d6: {:?}", Dice::new::<u32>(3, 6));
+//! println!("3d6: {:?}", Dice::new(3, 6));
 //! ```
 use std::fmt;
 use std::ops::Add;
@@ -112,7 +112,7 @@ impl Rollable for usize {
 /// ```
 /// use one_d_six::try_quickroll;
 ///
-/// if let Ok(roll) = try_quickroll("1d6") {
+/// if let Ok(roll) = try_quickroll::<u32>("1d6") {
 ///     assert!(roll >= 1);
 ///     assert!(roll <= 6);
 /// } else {
@@ -131,7 +131,7 @@ pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String> {
 /// ```
 /// use one_d_six::quickroll;
 ///
-/// let coin_flip = quickroll("1d2");
+/// let coin_flip: u8 = quickroll("1d2");
 ///
 /// assert!(coin_flip == 1 || coin_flip == 2);
 /// ```
