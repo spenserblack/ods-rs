@@ -13,7 +13,7 @@
 Rolls some dice
 
 ## Usage
-### As Binary
+### From Command Line
 ```bash
 # Install
 cargo install one-d-six
