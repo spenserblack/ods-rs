@@ -12,13 +12,12 @@
 
 Rolls some dice
 
-## Installing
-1. Clone this repository
-2. Run `make install`
-
 ## Usage
 ### As Binary
 ```bash
+# Install
+cargo install one-d-six
+
 # Print help
 one-d-six -h
 
