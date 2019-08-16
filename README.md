@@ -21,7 +21,7 @@ cargo install one-d-six
 # Print help
 one-d-six -h
 
-# Print total of dice rolls
+# Print total of each dice
 one-d-six 3d4 2d6 1d20
 
 # Print each die cast of each dice roll
