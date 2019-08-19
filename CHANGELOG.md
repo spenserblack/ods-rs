@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.2.1...master)
+### Changed
+- `Dice::roll_all` to no longer take ownership of `self`
 
 ## [0.2.1] 2019/08/15
 ### Removed
