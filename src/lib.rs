@@ -202,9 +202,7 @@ pub struct Die<T: Rollable = u32> {
 ///
 /// let mut dice: Dice = "3d6".parse().unwrap();
 ///
-/// dice = dice.roll_all();
-///
-/// assert!(dice.total() >= 3);
+/// assert!(dice.roll_all().total() >= 3);
 /// assert!(dice.total() <= 18);
 /// ```
 ///
@@ -359,7 +357,7 @@ impl<T: Rollable> Dice<T> {
         }).collect()
     }
 
-    /// Rolls all dice and gets the face of each one.
+    /// Rolls all dice and returns self.
     ///
     /// # Example
     ///
@@ -374,7 +372,7 @@ impl<T: Rollable> Dice<T> {
     ///     assert!(val <= 4);
     /// }
     /// ```
-    pub fn roll_all(mut self) -> Self {
+    pub fn roll_all(&mut self) -> &Self {
         let iter = self.dice.iter_mut().map(|die| {
             die.roll();
         });
@@ -521,7 +519,7 @@ mod tests {
     #[test]
     fn roll_all() {
         for _ in 0..100 {
-            let dice = Dice::new(4, 2);
+            let mut dice = Dice::new(4, 2);
 
             let sum: u32 = dice.roll_all().current_faces().iter().sum();
 
@@ -548,8 +546,7 @@ mod tests {
         let mut dice = one_d_6 + two_d_4;
 
         for _ in 0..100 {
-            dice = dice.roll_all();
-            let total = dice.total();
+            let total = dice.roll_all().total();
             assert!(total >= 2);
             assert!(total <= 14);
         }
@@ -560,8 +557,7 @@ mod tests {
         let mut dice: Dice<u32> = "3d4".parse().unwrap();
 
         for _ in 0..100 {
-            dice = dice.roll_all();
-            let total = dice.total();
+            let total = dice.roll_all().total();
             assert!(total >= 3);
             assert!(total <= 12);
         }
