@@ -22,14 +22,14 @@ fn usage_example() {
 
     // Prints 50 rolls of the dice set
     for _ in 0..50 {
-        dice = dice.roll_all();
+        // Method 1: Printing Dice struct
+        let dice_str = format!("2d4 + 1d20: {}", dice.roll_all());
 
-        // Method 1
-        println!("2d4 + 1d20: {}", dice);
-
-        // Method 2
+        // Method 2: Printing value of Dice::total(&self)
         let total: u32 = dice.total();
-        println!("2d4 + 1d20: {}", total);
+        let total_str = format!("2d4 + 1d20: {}", total);
+
+        assert_eq!(dice_str, total_str);
     }
 
     // Getting value of each die cast
