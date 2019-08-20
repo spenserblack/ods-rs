@@ -62,7 +62,7 @@ use rand::Rng;
 
 /// Defines a type that can be rolled for.
 /// Implement this trait on a type you would like to roll for.
-pub trait Rollable: fmt::Display + FromStr + Copy {
+pub trait Rollable: fmt::Display + Copy {
     fn roll(max: Self) -> Self;
 }
 
@@ -150,6 +150,7 @@ impl DiceTotal<usize> for usize {
 pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String>
 where
     T: DiceTotal<T>,
+    T: FromStr,
 {
     let dice: Dice<T> = dice_format.parse()?;
     Ok(dice.total())
@@ -173,6 +174,7 @@ where
 pub fn quickroll<T: Rollable>(dice_format: &str) -> T
 where
     T: DiceTotal<T>,
+    T: FromStr,
 {
     let dice: Dice<T> = dice_format.parse().unwrap();
     dice.total()
@@ -447,7 +449,7 @@ impl<T: Rollable> Add for Dice<T> {
     }
 }
 
-impl<T: Rollable> FromStr for Dice<T> {
+impl<T: Rollable> FromStr for Dice<T> where T: FromStr {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
