@@ -4,6 +4,12 @@
 ### Changed
 - `Dice::roll_all` to borrow instead of take ownership of `self`
 
+### Fixed
+- Roll distribution
+
+### Removed
+- `num` dependency
+
 ## [0.2.1] 2019/08/15
 ### Removed
 - Accidental `pub use` of types from the `rand` crate
