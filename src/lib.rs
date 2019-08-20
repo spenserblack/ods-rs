@@ -62,7 +62,7 @@ use rand::Rng;
 
 /// Defines a type that can be rolled for.
 /// Implement this trait on a type you would like to roll for.
-pub trait Rollable: fmt::Display + Copy {
+pub trait Rollable: Copy {
     fn roll(max: Self) -> Self;
 }
 
@@ -474,13 +474,14 @@ impl<T: Rollable> FromStr for Dice<T> where T: FromStr {
 impl<T: Rollable> fmt::Display for Dice<T>
 where
     T: DiceTotal<T>,
+    T: fmt::Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.total())
     }
 }
 
-impl<T: Rollable> fmt::Debug for Dice<T> {
+impl<T: Rollable> fmt::Debug for Dice<T> where T: fmt::Display {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut iter = self.dice.iter();
         let first = match iter.next() {
