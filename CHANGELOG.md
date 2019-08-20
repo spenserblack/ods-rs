@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.2.1...master)
+## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.3.0...master)
+
+## [0.3.0] 2019/08/20
 ### Changed
 - `Dice::roll_all` to borrow instead of take ownership of `self`
 
@@ -26,5 +28,6 @@
 - Library for rolling dice
 - Binary w/ CLI for rolling dice
 
+[0.3.0]: https://github.com/spenserblack/one-d-six-rs/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/spenserblack/one-d-six-rs/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/spenserblack/one-d-six-rs/compare/v0.1.0...v0.2.0
