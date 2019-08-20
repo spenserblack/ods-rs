@@ -14,5 +14,4 @@ repository = "https://github.com/spenserblack/one-d-six-rs"
 
 [dependencies]
 clap = "2.33"
-num = "0.2"
 rand = "0.7"
