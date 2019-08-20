@@ -64,3 +64,4 @@ for _ in 0..50 {
 // Getting value of each die cast
 let _results = format!("{:?}", dice);
 ```
+Want to roll for your own custom type? Just implement `one_d_six::Rollable` on `MyCustomType`, and then you can create a new `Die<MyCustomType>`!
