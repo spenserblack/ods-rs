@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.3.0...master)
+### Changed
+- `DiceTrait` to be implemented on type that implements `Rollable`
 
 ## [0.3.0] 2019/08/20
 ### Changed
