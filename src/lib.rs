@@ -103,6 +103,44 @@ impl Rollable for usize {
     }
 }
 
+/// Allows a `Vec<T>` to be totalled.
+/// Implement this if you want a set of `Dice` containing a type to be able to
+/// total the dice together.
+pub trait DiceTotal<T: Rollable> {
+    fn dice_total(&self) -> T;
+}
+
+impl DiceTotal<u8> for Vec<u8> {
+    fn dice_total(&self) -> u8 {
+        self.iter().sum()
+    }
+}
+impl DiceTotal<u16> for Vec<u16> {
+    fn dice_total(&self) -> u16 {
+        self.iter().sum()
+    }
+}
+impl DiceTotal<u32> for Vec<u32> {
+    fn dice_total(&self) -> u32 {
+        self.iter().sum()
+    }
+}
+impl DiceTotal<u64> for Vec<u64> {
+    fn dice_total(&self) -> u64 {
+        self.iter().sum()
+    }
+}
+impl DiceTotal<u128> for Vec<u128> {
+    fn dice_total(&self) -> u128 {
+        self.iter().sum()
+    }
+}
+impl DiceTotal<usize> for Vec<usize> {
+    fn dice_total(&self) -> usize {
+        self.iter().sum()
+    }
+}
+
 /// Attempts to roll dice based on a *1d6* style string.
 ///
 /// # Example
@@ -117,7 +155,8 @@ impl Rollable for usize {
 ///     unreachable!();
 /// }
 /// ```
-pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String> {
+pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String>
+    where Vec<T>: DiceTotal<T> {
     let dice: Dice<T> = dice_format.parse()?;
     Ok(dice.total())
 }
@@ -137,7 +176,8 @@ pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String> {
 /// # Panics
 ///
 /// Panics if `dice_format` is in an improper format.
-pub fn quickroll<T: Rollable>(dice_format: &str) -> T {
+pub fn quickroll<T: Rollable>(dice_format: &str) -> T
+    where Vec<T>: DiceTotal<T> {
     let dice: Dice<T> = dice_format.parse().unwrap();
     dice.total()
 }
@@ -392,12 +432,8 @@ impl<T: Rollable> Dice<T> {
     /// assert!(two_d_4.total() >= 2);
     /// assert!(two_d_4.total() <= 8);
     /// ```
-    pub fn total(&self) -> T {
-        let mut total = T::zero();
-        for f in self.current_faces().iter() {
-            total = total + *f;
-        }
-        total
+    pub fn total(&self) -> T where Vec<T>: DiceTotal<T> {
+        self.current_faces().dice_total()
     }
 }
 
@@ -440,7 +476,7 @@ impl<T: Rollable> FromStr for Dice<T> {
     }
 }
 
-impl<T: Rollable> fmt::Display for Dice<T> {
+impl<T: Rollable> fmt::Display for Dice<T> where Vec<T>: DiceTotal<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.total())
     }
