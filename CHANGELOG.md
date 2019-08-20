@@ -2,6 +2,7 @@
 
 ## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.3.0...master)
 ### Changed
+- `Rollable` to only require implementation of the `Copy` trait
 - `DiceTrait` to be implemented on type that implements `Rollable`
 
 ## [0.3.0] 2019/08/20
