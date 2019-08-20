@@ -72,7 +72,7 @@ use rand::Rng;
 ///     quickroll,
 /// };
 ///
-/// #[derive(Clone, Copy)]
+/// #[derive(Clone, Copy, Debug)]
 /// enum Shapes {
 ///     Triangle,
 ///     Square,
@@ -94,7 +94,8 @@ use rand::Rng;
 ///
 /// // We still need a maximum to satisfy Rollable::roll requirements
 /// let max = Shapes::Circle;
-/// Shapes::roll(max);
+/// let mut shape_roller = Die::new(max);
+/// println!("You rolled {:?}!", shape_roller.roll());
 /// ```
 pub trait Rollable: Copy {
     fn roll(max: Self) -> Self;
