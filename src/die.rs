@@ -113,3 +113,42 @@ where
         self.current_value + other.current_value
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn current_face() {
+        let coin: Die<u128> = Die::new(2);
+
+        for _ in 0..100 {
+            assert!(coin.current_face() >= 1);
+            assert!(coin.current_face() <= 2);
+        }
+    }
+
+    #[test]
+    fn roll() {
+        let mut d12: Die<u64> = Die::new(12);
+
+        for _ in 0..100 {
+            d12.roll();
+            assert!(d12.current_face() >= 1);
+            assert!(d12.current_face() <= 12);
+        }
+    }
+
+    #[test]
+    fn add_die() {
+        for _ in 0..100 {
+            let penny: Die<u8> = Die::new(2);
+            let quarter: Die<u8> = Die::new(2);
+
+            let sum = penny + quarter;
+
+            assert!(sum >= 2);
+            assert!(sum <= 4);
+        }
+    }
+}

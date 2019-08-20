@@ -216,3 +216,67 @@ impl<T: Rollable> Dice<T> {
         T::dice_total(self.current_faces())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn current_faces() {
+        for _ in 0..100 {
+            let dice = Dice::new(3, 6);
+
+            let sum: u32 = dice.current_faces().iter().sum();
+
+            assert!(sum >= 3);
+            assert!(sum <= 18);
+        }
+    }
+
+    #[test]
+    fn roll_all() {
+        for _ in 0..100 {
+            let mut dice = Dice::new(4, 2);
+
+            let sum: u32 = dice.roll_all().current_faces().iter().sum();
+
+            assert!(sum >= 4);
+            assert!(sum <= 8);
+        }
+    }
+
+    #[test]
+    fn total() {
+        for _ in 0..100 {
+            let dice: Dice<u16> = Dice::new(2, 3);
+            let total = dice.total();
+
+            assert!(total >= 2);
+            assert!(total <= 6);
+        }
+    }
+
+    #[test]
+    fn add_dice() {
+        let one_d_6: Dice<u8> = Dice::new(1, 6);
+        let two_d_4: Dice<u8> = Dice::new(2, 4);
+        let mut dice = one_d_6 + two_d_4;
+
+        for _ in 0..100 {
+            let total = dice.roll_all().total();
+            assert!(total >= 2);
+            assert!(total <= 14);
+        }
+    }
+
+    #[test]
+    fn dice_from_str() {
+        let mut dice: Dice<u32> = "3d4".parse().unwrap();
+
+        for _ in 0..100 {
+            let total = dice.roll_all().total();
+            assert!(total >= 3);
+            assert!(total <= 12);
+        }
+    }
+}
