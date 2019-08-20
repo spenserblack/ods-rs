@@ -97,9 +97,8 @@ impl Rollable for usize {
     }
 }
 
-/// Allows a `Vec<T>` to be totalled.
-/// Implement this if you want a set of `Dice` containing a type to be able to
-/// total the dice together.
+/// Allows `one_d_six::Dice::total` to be used.
+/// Implement this on `Vec<T>` if you want to use `Dice<T>::total()`.
 pub trait DiceTotal<T: Rollable> {
     fn dice_total(&self) -> T;
 }
