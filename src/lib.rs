@@ -62,6 +62,40 @@ use rand::Rng;
 
 /// Defines a type that can be rolled for.
 /// Implement this trait on a type you would like to roll for.
+///
+/// # Example
+///
+/// ```
+/// use one_d_six::{
+///     Die,
+///     Rollable,
+///     quickroll,
+/// };
+///
+/// #[derive(Clone, Copy)]
+/// enum Shapes {
+///     Triangle,
+///     Square,
+///     Circle,
+/// }
+///
+/// impl Rollable for Shapes {
+///     // We're ignoring max since we don't need a maximum for this example
+///     fn roll(_max: Shapes) -> Shapes {
+///         let roll_result: u8 = quickroll("1d3");
+///         match roll_result {
+///             1 => Shapes::Triangle,
+///             2 => Shapes::Square,
+///             3 => Shapes::Circle,
+///             _ => unreachable!(),
+///         }
+///     }
+/// }
+///
+/// // We still need a maximum to satisfy Rollable::roll requirements
+/// let max = Shapes::Circle;
+/// Shapes::roll(max);
+/// ```
 pub trait Rollable: Copy {
     fn roll(max: Self) -> Self;
 }
