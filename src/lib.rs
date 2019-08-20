@@ -54,8 +54,6 @@
 //! let dice: Dice = Dice::new(3, 6);
 //! println!("3d6: {:?}", dice);
 //! ```
-use std::fmt;
-use std::ops::Add;
 use std::str::FromStr;
 
 pub use dice::*;
