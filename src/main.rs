@@ -1,7 +1,4 @@
-use clap::{
-    Arg,
-    App,
-};
+use clap::{App, Arg};
 
 use one_d_six::Dice;
 

@@ -1,7 +1,4 @@
-use one_d_six::{
-  quickroll,
-  Dice,
-};
+use one_d_six::{quickroll, Dice};
 
 #[test]
 fn usage_example() {

@@ -150,7 +150,9 @@ impl DiceTotal<usize> for Vec<usize> {
 /// }
 /// ```
 pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String>
-    where Vec<T>: DiceTotal<T> {
+where
+    Vec<T>: DiceTotal<T>,
+{
     let dice: Dice<T> = dice_format.parse()?;
     Ok(dice.total())
 }
@@ -171,7 +173,9 @@ pub fn try_quickroll<T: Rollable>(dice_format: &str) -> Result<T, String>
 ///
 /// Panics if `dice_format` is in an improper format.
 pub fn quickroll<T: Rollable>(dice_format: &str) -> T
-    where Vec<T>: DiceTotal<T> {
+where
+    Vec<T>: DiceTotal<T>,
+{
     let dice: Dice<T> = dice_format.parse().unwrap();
     dice.total()
 }
@@ -307,7 +311,10 @@ impl<T: Rollable> Die<T> {
     }
 }
 
-impl<T: Rollable> Add for Die<T> where T: Add {
+impl<T: Rollable> Add for Die<T>
+where
+    T: Add,
+{
     type Output = T::Output;
 
     fn add(self, other: Self) -> Self::Output {
@@ -337,9 +344,7 @@ impl<T: Rollable> Dice<T> {
             v
         };
 
-        Dice {
-            dice
-        }
+        Dice { dice }
     }
 
     /// Creates a set of dice from a `Vec<Die>`.
@@ -366,9 +371,7 @@ impl<T: Rollable> Dice<T> {
     pub fn from(dice: Box<[Die<T>]>) -> Self {
         let dice = dice.into_vec();
 
-        Dice {
-            dice
-        }
+        Dice { dice }
     }
 
     /// Gets the current face of each die in the dice set.
@@ -385,9 +388,7 @@ impl<T: Rollable> Dice<T> {
     /// }
     /// ```
     pub fn current_faces(&self) -> Vec<T> {
-        self.dice.iter().map(|die| {
-            die.current_face()
-        }).collect()
+        self.dice.iter().map(|die| die.current_face()).collect()
     }
 
     /// Rolls all dice and returns self.
@@ -425,7 +426,10 @@ impl<T: Rollable> Dice<T> {
     /// assert!(two_d_4.total() >= 2);
     /// assert!(two_d_4.total() <= 8);
     /// ```
-    pub fn total(&self) -> T where Vec<T>: DiceTotal<T> {
+    pub fn total(&self) -> T
+    where
+        Vec<T>: DiceTotal<T>,
+    {
         self.current_faces().dice_total()
     }
 }
@@ -441,9 +445,7 @@ impl<T: Rollable> Add for Dice<T> {
         for die in other.dice.into_iter() {
             dice.push(die);
         }
-        Dice {
-            dice,
-        }
+        Dice { dice }
     }
 }
 
@@ -469,7 +471,10 @@ impl<T: Rollable> FromStr for Dice<T> {
     }
 }
 
-impl<T: Rollable> fmt::Display for Dice<T> where Vec<T>: DiceTotal<T> {
+impl<T: Rollable> fmt::Display for Dice<T>
+where
+    Vec<T>: DiceTotal<T>,
+{
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.total())
     }
