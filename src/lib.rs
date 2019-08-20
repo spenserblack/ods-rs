@@ -59,6 +59,7 @@ use std::ops::Add;
 use std::str::FromStr;
 
 use num::Unsigned;
+use rand::Rng;
 
 /// Defines a type that can be rolled for.
 /// Implement this trait on a type you would like to roll for.
@@ -68,38 +69,32 @@ pub trait Rollable: Unsigned + fmt::Display + FromStr + Copy {
 
 impl Rollable for u8 {
     fn roll(max: u8) -> u8 {
-        let r: u8 = rand::random();
-        (r % max) + 1
+        rand::thread_rng().gen_range(0, max) + 1
     }
 }
 impl Rollable for u16 {
     fn roll(max: u16) -> u16 {
-        let r: u16 = rand::random();
-        (r % max) + 1
+        rand::thread_rng().gen_range(0, max) + 1
     }
 }
 impl Rollable for u32 {
     fn roll(max: u32) -> u32 {
-        let r: u32 = rand::random();
-        (r % max) + 1
+        rand::thread_rng().gen_range(0, max) + 1
     }
 }
 impl Rollable for u64 {
     fn roll(max: u64) -> u64 {
-        let r: u64 = rand::random();
-        (r % max) + 1
+        rand::thread_rng().gen_range(0, max) + 1
     }
 }
 impl Rollable for u128 {
     fn roll(max: u128) -> u128 {
-        let r: u128 = rand::random();
-        (r % max) + 1
+        rand::thread_rng().gen_range(0, max) + 1
     }
 }
 impl Rollable for usize {
     fn roll(max: usize) -> usize {
-        let r: usize = rand::random();
-        (r % max) + 1
+        rand::thread_rng().gen_range(0, max) + 1
     }
 }
 
