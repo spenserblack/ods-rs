@@ -58,11 +58,9 @@ use std::fmt;
 use std::ops::Add;
 use std::str::FromStr;
 
-use num::Unsigned;
-
 /// Defines a type that can be rolled for.
 /// Implement this trait on a type you would like to roll for.
-pub trait Rollable: Unsigned + fmt::Display + FromStr + Copy {
+pub trait Rollable: fmt::Display + FromStr + Copy {
     fn roll(max: Self) -> Self;
 }
 
@@ -274,11 +272,10 @@ impl<T: Rollable> Die<T> {
     /// let coin: Die = Die::new(2);
     /// ```
     pub fn new(faces: T) -> Self {
-        let mut die = Die {
+        let die = Die {
             faces,
-            current_value: T::one(),
+            current_value: T::roll(faces),
         };
-        die.roll();
         die
     }
     /// Rolls a single die.
@@ -314,8 +311,8 @@ impl<T: Rollable> Die<T> {
     }
 }
 
-impl<T: Rollable> Add for Die<T> {
-    type Output = T;
+impl<T: Rollable> Add for Die<T> where T: Add {
+    type Output = T::Output;
 
     fn add(self, other: Self) -> Self::Output {
         self.current_value + other.current_value
