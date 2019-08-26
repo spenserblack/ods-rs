@@ -15,3 +15,8 @@ repository = "https://github.com/spenserblack/one-d-six-rs"
 [dependencies]
 clap = "2.33"
 rand = "0.7"
+
+[badges]
+is-it-maintained-issue-resolution = { repository = "spenserblack/one-d-six-rs" }
+is-it-maintained-open-issues = { repository = "spenserblack/one-d-six-rs" }
+maintenance = { status = "passively-maintained" }
