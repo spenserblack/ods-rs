@@ -51,7 +51,7 @@
 //!
 //!
 //! // Will look like "1 2 3"
-//! let dice: Dice = Dice::new(3, 6);
+//! let dice = Dice::new(3, 6);
 //! println!("3d6: {:?}", dice);
 //! ```
 use std::str::FromStr;
