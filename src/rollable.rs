@@ -71,3 +71,33 @@ impl Rollable for usize {
         rand::thread_rng().gen_range(0, max) + 1
     }
 }
+impl Rollable for i8 {
+    fn roll(max: i8) -> i8 {
+        rand::thread_rng().gen_range(0, max) + 1
+    }
+}
+impl Rollable for i16 {
+    fn roll(max: i16) -> i16 {
+        rand::thread_rng().gen_range(0, max) + 1
+    }
+}
+impl Rollable for i32 {
+    fn roll(max: i32) -> i32 {
+        rand::thread_rng().gen_range(0, max) + 1
+    }
+}
+impl Rollable for i64 {
+    fn roll(max: i64) -> i64 {
+        rand::thread_rng().gen_range(0, max) + 1
+    }
+}
+impl Rollable for i128 {
+    fn roll(max: i128) -> i128 {
+        rand::thread_rng().gen_range(0, max) + 1
+    }
+}
+impl Rollable for isize {
+    fn roll(max: isize) -> isize {
+        rand::thread_rng().gen_range(0, max) + 1
+    }
+}
