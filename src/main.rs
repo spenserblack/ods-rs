@@ -13,7 +13,7 @@ fn main() {
         .long("complex")
         .help("If you want each cast die to be printed");
     let app_args = App::new("One D Six")
-        .version("0.4.0")
+        .version("0.5.0")
         .about("Rolls some dice")
         .arg(input_arg)
         .arg(complexity_arg);
