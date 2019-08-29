@@ -35,7 +35,7 @@ use one_d_six::{
   Dice,
 };
 
-// Quickly generating a set of Dice and rolls them
+// Quickly generates a set of Dice and rolls them
 let coinflip: u8 = quickroll("1d2");
 if coinflip == 1 {
     println!("Heads!");
