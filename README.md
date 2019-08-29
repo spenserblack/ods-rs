@@ -8,8 +8,6 @@
 
 ![GitHub Release Date](https://img.shields.io/github/release-date/spenserblack/one-d-six-rs)
 ![GitHub commits since latest release](https://img.shields.io/github/commits-since/spenserblack/one-d-six-rs/latest)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/spenserblack/one-d-six-rs)
-![GitHub repo size](https://img.shields.io/github/repo-size/spenserblack/one-d-six-rs)
 
 Rolls some dice
 
