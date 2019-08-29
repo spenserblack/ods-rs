@@ -36,6 +36,7 @@ use one_d_six::{
 };
 
 // Quickly generates a set of Dice and rolls them
+// quickroll can return any int type (i8 - isize, u8 - usize)
 let coinflip: u8 = quickroll("1d2");
 if coinflip == 1 {
     println!("Heads!");
