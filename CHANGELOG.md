@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased](https://github.com/spenserblack/one-d-six-rs/compare/v0.4.0...master)
+### Changed
+- Made signed ints usable by default for `Die` and `Dice`.
 
 ## [0.4.0] 2019/08/20
 ### Changed
