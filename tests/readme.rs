@@ -12,7 +12,7 @@ fn usage_example() {
 
     // Creating sets of dice
     let set_1 = Dice::new(2, 4); // Creates 2d4 with Dice::new
-    let set_2: Dice = "1d20".parse().unwrap(); // Creates 1d20 by parsing str
+    let set_2 = "1d20".parse().unwrap(); // Creates 1d20 by parsing str
 
     // Combining sets of dice
     let mut dice = set_1 + set_2; // Creates 2d4 + 1d20
@@ -23,7 +23,7 @@ fn usage_example() {
         let dice_str = format!("2d4 + 1d20: {}", dice.roll_all());
 
         // Method 2: Printing value of Dice::total(&self)
-        let total: u32 = dice.total();
+        let total = dice.total();
         let total_str = format!("2d4 + 1d20: {}", total);
 
         assert_eq!(dice_str, total_str);

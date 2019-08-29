@@ -13,8 +13,8 @@ use crate::Rollable;
 /// let mut d4 = Die::new(4);
 /// let mut d6 = Die::new(6);
 ///
-/// let d4_result: u32 = d4.roll();
-/// let d6_result: u32 = d6.roll();
+/// let d4_result = d4.roll();
+/// let d6_result = d6.roll();
 /// let result = d4_result + d6_result;
 ///
 /// assert!(result >= 2);
@@ -28,8 +28,8 @@ use crate::Rollable;
 /// let d4 = Die::new(4);
 /// let d6 = Die::new(6);
 ///
-/// let d4_result: u32 = d4.current_face();
-/// let d6_result: u32 = d6.current_face();
+/// let d4_result = d4.current_face();
+/// let d6_result = d6.current_face();
 /// let result = d4_result + d6_result;
 ///
 /// assert!(result >= 2);
@@ -61,7 +61,7 @@ impl<T: Rollable> Die<T> {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let coin: Die = Die::new(2);
+    /// let coin = Die::new(2);
     /// ```
     pub fn new(faces: T) -> Self {
         let die = Die {
@@ -77,7 +77,7 @@ impl<T: Rollable> Die<T> {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let mut d6: Die = Die::new(6);
+    /// let mut d6 = Die::new(6);
     ///
     /// assert!(d6.roll() >= 1);
     /// assert!(d6.current_face() <= 6);
@@ -93,7 +93,7 @@ impl<T: Rollable> Die<T> {
     /// ```
     /// use one_d_six::Die;
     ///
-    /// let d4: Die = Die::new(4);
+    /// let d4 = Die::new(4);
     ///
     /// assert!(d4.current_face() >= 1);
     /// assert!(d4.current_face() <= 4);

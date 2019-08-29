@@ -27,7 +27,7 @@ use crate::{
 /// use one_d_six::Dice;
 ///
 /// let one_d6: Dice = "1d6".parse().unwrap();
-/// let three_d4: Dice = Dice::new(3, 4);
+/// let three_d4 = Dice::new(3, 4);
 ///
 /// let dice = one_d6 + three_d4;
 ///
@@ -116,7 +116,7 @@ impl<T: Rollable> Dice<T> {
     /// use one_d_six::Dice;
     ///
     /// // Creates 3d6 dice collection
-    /// let dice: Dice = Dice::new(3, 6);
+    /// let dice = Dice::new(3, 6);
     /// ```
     pub fn new(dice: usize, faces: T) -> Self {
         let dice = {
@@ -142,7 +142,7 @@ impl<T: Rollable> Dice<T> {
     /// };
     ///
     /// // Creates 2d6 + 1d4 dice collection
-    /// let dice: Dice = {
+    /// let dice = {
     ///     let dice = [
     ///         Die::new(6),
     ///         Die::new(6),
@@ -164,7 +164,7 @@ impl<T: Rollable> Dice<T> {
     /// ```
     /// use one_d_six::Dice;
     ///
-    /// let four_coins: Dice = Dice::new(4, 2);
+    /// let four_coins = Dice::new(4, 2);
     ///
     /// for val in four_coins.current_faces().iter() {
     ///     assert!(val == &1 || val == &2);
@@ -204,7 +204,7 @@ impl<T: Rollable> Dice<T> {
     /// ```
     /// use one_d_six::Dice;
     ///
-    /// let two_d_4: Dice = Dice::new(2, 4);
+    /// let two_d_4 = Dice::new(2, 4);
     ///
     /// assert!(two_d_4.total() >= 2);
     /// assert!(two_d_4.total() <= 8);

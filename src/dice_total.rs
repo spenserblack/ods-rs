@@ -35,3 +35,33 @@ impl DiceTotal<usize> for usize {
         dice_faces.iter().sum()
     }
 }
+impl DiceTotal<i8> for i8 {
+    fn dice_total(dice_faces: Vec<i8>) -> i8 {
+        dice_faces.iter().sum()
+    }
+}
+impl DiceTotal<i16> for i16 {
+    fn dice_total(dice_faces: Vec<i16>) -> i16 {
+        dice_faces.iter().sum()
+    }
+}
+impl DiceTotal<i32> for i32 {
+    fn dice_total(dice_faces: Vec<i32>) -> i32 {
+        dice_faces.iter().sum()
+    }
+}
+impl DiceTotal<i64> for i64 {
+    fn dice_total(dice_faces: Vec<i64>) -> i64 {
+        dice_faces.iter().sum()
+    }
+}
+impl DiceTotal<i128> for i128 {
+    fn dice_total(dice_faces: Vec<i128>) -> i128 {
+        dice_faces.iter().sum()
+    }
+}
+impl DiceTotal<isize> for isize {
+    fn dice_total(dice_faces: Vec<isize>) -> isize {
+        dice_faces.iter().sum()
+    }
+}
