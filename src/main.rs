@@ -1,4 +1,4 @@
-use clap::{App, Arg};
+use clap::{App, Arg, crate_version};
 
 use one_d_six::Dice;
 
@@ -13,7 +13,7 @@ fn main() {
         .long("complex")
         .help("If you want each cast die to be printed");
     let app_args = App::new("One D Six")
-        .version("0.5.0")
+        .version(crate_version!())
         .about("Rolls some dice")
         .arg(input_arg)
         .arg(complexity_arg);
