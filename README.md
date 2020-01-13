@@ -1,13 +1,9 @@
 # One D Six
 [![Crates.io](https://img.shields.io/crates/v/one-d-six)](https://crates.io/crates/one-d-six)
 [![docs.rs](https://docs.rs/one-d-six/badge.svg)](https://docs.rs/one-d-six/)
-[![dependency status](https://deps.rs/repo/github/spenserblack/one-d-six-rs/status.svg)](https://deps.rs/repo/github/spenserblack/one-d-six-rs)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=spenserblack/one-d-six-rs)](https://dependabot.com)
 ![Crates.io downloads](https://img.shields.io/crates/d/one-d-six)
-![Crates.io downloads of latest version](https://img.shields.io/crates/dv/one-d-six)
 ![License](https://img.shields.io/crates/l/one-d-six)
-
-[![GitHub Release Date](https://img.shields.io/github/release-date/spenserblack/one-d-six-rs)](https://github.com/spenserblack/one-d-six-rs/releases/latest)
-![GitHub commits since latest release](https://img.shields.io/github/commits-since/spenserblack/one-d-six-rs/latest)
 
 Rolls some dice
 
