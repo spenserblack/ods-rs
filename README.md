@@ -1,6 +1,7 @@
 # One D Six
 [![Crates.io](https://img.shields.io/crates/v/one-d-six)](https://crates.io/crates/one-d-six)
 [![docs.rs](https://docs.rs/one-d-six/badge.svg)](https://docs.rs/one-d-six/)
+[![Build Status](https://travis-ci.com/spenserblack/one-d-six-rs.svg?branch=master)](https://travis-ci.com/spenserblack/one-d-six-rs)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=spenserblack/one-d-six-rs)](https://dependabot.com)
 ![Crates.io downloads](https://img.shields.io/crates/d/one-d-six)
 ![License](https://img.shields.io/crates/l/one-d-six)
