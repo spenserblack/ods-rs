@@ -14,7 +14,7 @@ repository = "https://github.com/spenserblack/one-d-six-rs"
 
 [dependencies]
 clap = "2.33"
-rand = "0.7"
+rand = "0.8"
 
 [badges]
 is-it-maintained-issue-resolution = { repository = "spenserblack/one-d-six-rs" }
