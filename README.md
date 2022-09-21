@@ -1,4 +1,9 @@
 # One D Six
+
+:warning: Archiving this since this was just a first project to learn Rust. If you stumble on this and
+would like to see more development, you can reach me [here](https://github.com/spenserblack/spenserblack/discussions).
+I'll be happy to un-archive the repository.
+
 [![Crates.io](https://img.shields.io/crates/v/one-d-six)](https://crates.io/crates/one-d-six)
 [![docs.rs](https://docs.rs/one-d-six/badge.svg)](https://docs.rs/one-d-six/)
 [![Build Status](https://travis-ci.com/spenserblack/one-d-six-rs.svg?branch=master)](https://travis-ci.com/spenserblack/one-d-six-rs)
